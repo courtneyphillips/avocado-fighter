@@ -2,6 +2,7 @@ require 'gosu'
 require './lib/player.rb'
 require './lib/zorder.rb'
 require './lib/star.rb'
+
 # require 'pry'
 
 class GameWindow < Gosu::Window
@@ -21,9 +22,9 @@ class GameWindow < Gosu::Window
     @time_spent_value = Gosu::Font.new(self, Gosu::default_font_name, 20)
     @items_collected_message = Gosu::Font.new(self, Gosu::default_font_name, 20)
     @items_collected_count =Gosu::Font.new(self, Gosu::default_font_name, 20)
-    @final_score_msg = Gosu::Image.from_text(self, "GAME OVER !!!", Gosu.default_font_name, 50)
+    @final_score_msg = Gosu::Image.from_text(self, "GAME OVER", Gosu.default_font_name, 50)
     @message_height = 700
-    @star_anim = Gosu::Image::load_tiles(self, "media/pizza.jpg", 25, 25, false)
+    @star_anim = Gosu::Image::load_tiles(self, "media/all_food.png", 25, 25, false)
     @stars = Array.new
     @counter = 0
   end
@@ -75,12 +76,12 @@ class GameWindow < Gosu::Window
     @player.draw
     @background_image.draw(0, 0, ZOrder::Background)
     @stars.each { |star| star.draw }
-    @font.draw("Score: #{@player.score}", 10, 10, ZOrder::UI, 1.0, 1.0, 0xffffff00)
+    @font.draw("Score: #{@player.score}", 0, 50, ZOrder::UI, 1.0, 1.0, 0xffffff00)
 
     @time_spent_message.draw("Time Remaining:", 0 , 0, 1)
     @time_spent_value.draw(GAMETIME - @time_spent/60, 150, 0, 1)
-    @items_collected_message.draw("Stars Collected:", 0 , 50, 1)
-    @items_collected_count.draw(@counter, 160 , 50, 1)
+    # @items_collected_message.draw("Stars Collected:", 0 , 50, 1)
+    # @items_collected_count.draw(@counter, 160 , 50, 1)
     @final_score_msg.draw(200, @message_height, 1)
   end
 
